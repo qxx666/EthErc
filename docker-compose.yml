@@ -1,0 +1,23 @@
+version: '2.1'
+
+services:
+  service:
+    container_name: ${COMPOSE_PROJECT_NAME}.dev
+    build:
+      context: .
+    expose:
+      - 80/tcp
+    networks:
+      - godockerdev_default
+      - local
+    volumes:
+      - .:${APP_DIR}
+    environment:
+      - TZ=Asia/Shanghai
+
+networks:
+  godockerdev_default:
+    external:
+      name: godockerdev_default
+  local:
+    internal: true

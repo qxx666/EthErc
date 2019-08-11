@@ -1,0 +1,86 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>22COIN - 数字资产管理系统 v{{.pj_ver}}</title>
+    <meta name="description" content="22COIN">
+    <meta name="keywords" content="index">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="Cache-Control" content="no-siteapp"/>
+    <link rel="icon" type="image/png" href="/assets/i/favicon.png">
+    <link rel="apple-touch-icon-precomposed" href="/assets/i/app-icon72x72@2x.png">
+    <meta name="apple-mobile-web-app-title" content="Amaze UI"/>
+    <link rel="stylesheet" href="/assets/css/amazeui.min.css"/>
+    <link rel="stylesheet" href="/assets/css/admin.css">
+    <link rel="stylesheet" href="/assets/css/app.css">
+
+
+</head>
+
+<body data-type="index">
+
+
+{{ template "header.html" }}
+
+
+<div class="tpl-page-container tpl-page-header-fixed">
+
+
+    {{ template "leftbar.html" }}
+
+    {{ .LayoutContent }}
+
+
+</div>
+
+
+
+
+<script src="/assets/js/jquery.min.js"></script>
+<script src="/assets/js/amazeui.min.js"></script>
+<script src="https://cdn.bootcss.com/layer/3.0.3/layer.js"></script>
+<script src="/assets/js/iscroll.js"></script>
+<script src="/assets/js/app.js"></script>
+<script src="/assets/js/common.js"></script>
+<script src="/assets/js/echarts.min.js"></script>
+<script src="/assets/js/clipboard.min.js"></script>
+<script type="text/javascript">
+
+    var moduleArray = [
+        "/admin/index.html",
+        "/admin/account",
+        "/admin/coin",
+        "/admin/transfer",
+        "/admin/transaction",
+        "/admin/withdraw",
+        "/admin/summary",
+        "/admin/log",
+        "/admin/setting",
+    ];
+
+    var headerpath = window.location.pathname;
+
+    var lis = $(".tpl-left-nav-menu .tpl-left-nav-item");
+    for (var i = 0; i < moduleArray.length; i++) {
+        modulePath = moduleArray[i];
+        if (headerpath.startWith(modulePath)) {
+            lis.eq(i).children("a:eq(0)").addClass("active");
+            lis.eq(i).children("ul:eq(0)").css('display', 'block');
+            lis.eq(i).children("a:eq(0)").children().eq(2).addClass("tpl-left-nav-more-ico-rotate")
+
+            var ulLiAtag = lis.eq(i).children("ul:eq(0)").find("li").find("a");
+            for (var j = 0; j < ulLiAtag.size(); j++) {
+                if (ulLiAtag[j].href.endWith(headerpath)) {
+                    ulLiAtag.eq(j).addClass("active")
+                }
+            }
+        }
+    }
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,118 @@
+<div class="tpl-content-wrapper">
+    <div class="tpl-content-page-title">
+        会员账户列表
+    </div>
+    <ol class="am-breadcrumb">
+        <li><a href="#" class="am-icon-home">首页</a></li>
+        <li><a href="#">会员账户列表</a></li>
+    </ol>
+    <div class="tpl-portlet-components">
+        <div class="portlet-title">
+            <div class="caption font-green bold">
+                <span class="am-icon-code"></span> 会员账户列表
+            </div>
+
+
+            <div class="tpl-portlet-input tpl-fz-ml">
+                <div class="portlet-input am-input-lg input-inline">
+                    <select id="coinSelector">
+                        <option>选择显示币种</option>
+                        {{ range .coins }}
+                        <option value="{{.Name}}">{{.Name}}</option>
+                        {{ end }}
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="tpl-block">
+            <div class="am-g">
+                <div class="am-u-sm-12 am-u-md-6">
+                    <div class="am-btn-toolbar">
+                        <div class="am-btn-group am-btn-group-xs">
+                            <!--<button type="button" class="am-btn am-btn-default am-btn-success add-modal-open"><span-->
+                                    <!--class="am-icon-plus"></span> 生成会员账户-->
+                            <!--</button>-->
+
+                            <div class="am-modal am-modal-prompt" tabindex="-1" id="add-modal">
+                                <div class="am-modal-dialog">
+                                    <div class="am-modal-hd">输入生成数量</div>
+                                    <div class="am-modal-bd">
+                                        <input type="text" class="am-modal-prompt-input" id="account_number">
+                                    </div>
+                                    <div class="am-modal-footer">
+                                        <span class="am-modal-btn" data-am-modal-cancel>取消</span>
+                                        <span class="am-modal-btn" onclick="createAccounts()" data-am-modal-confirm>生成</span>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+
+
+                </div>
+
+            </div>
+
+
+            <div class="am-g">
+                <div class="am-u-sm-12">
+                    <form class="am-form">
+                        <table class="am-table am-table-striped am-table-hover table-main">
+                            <thead>
+                            <tr>
+                                <th class="table-id">ID</th>
+                                <th class="table-author">账户地址</th>
+                                <th class="table-author">{{.currentCoin}}资产余额</th>
+                                <th class="table-author">同步交易所</th>
+                                <th class="table-author">生成时间</th>
+                                {{/*<th class="table-author">操作</th>*/}}
+                            </tr>
+                            </thead>
+                            <tbody>
+
+                            {{range $index, $elem := .accounts}}
+
+                            <tr>
+                                <td>{{ $index }}</td>
+                                <td>{{ .Address }}</td>
+                                <td>{{ .BalanceF.String }}</td>
+                                <td>{{ if eq .IsSync 1 }} 已同步 {{else}} 未同步 {{end}}</td>
+                                <td>{{ date .CreatedAt "Y-m-d H:i:s"}}</td>
+                                {{/*<td><a class="am-btn am-btn-danger" onclick="singleSummary();">汇总</a></td>*/}}
+                            </tr>
+
+                            {{end}}
+
+                            </tbody>
+                        </table>
+                        <div class="am-cf">
+
+                            <div class="am-fr">
+                                <ul class="am-pagination tpl-pagination">
+                                    {{ with .accountPage}}
+
+                                    <li {{ if .FirstPage }} class="am-disabled" {{ end }}><a href='?page={{ .PrePage }}'>«</a></li>
+
+                                    {{ str2html .PageHtml }}
+
+                                    <li {{ if .LastPage }} class="am-disabled" {{ end }}><a href='?page={{ .NextPage }}'>»</a></li>
+
+                                    {{end}}
+
+                                </ul>
+                            </div>
+                        </div>
+                        <hr>
+
+                    </form>
+                </div>
+
+            </div>
+        </div>
+        <div class="tpl-alert"></div>
+    </div>
+
+
+</div>

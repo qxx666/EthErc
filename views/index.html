@@ -1,0 +1,238 @@
+<div class="tpl-content-wrapper">
+    <div class="tpl-content-page-title">
+        22COIN数字资产管理系统
+    </div>
+    <ol class="am-breadcrumb">
+        <li><a href="#" class="am-icon-home">首页</a></li>
+        <!--<li><a href="#">分类</a></li>-->
+        <!--<li class="am-active">内容</li>-->
+    </ol>
+    <div class="tpl-content-scope">
+        <div class="note note-info">
+            <h3>22COIN数字资产管理系统
+                <span class="close" data-close="note"></span>
+            </h3>
+            <p>高性能、高可用、安全、可靠的数字资产管理系统。</p>
+            <p><span class="label label-info">提示:</span> 当前版本v{{.pj_ver}}
+            </p>
+            <p>系统运行状态: <span class="label label-{{if .SystemIsNormal}}info{{else}}danger{{end}}"><a style="color: #FFFFFF;" href='{{urlfor "LogController.LogList"}}'>当前运行{{if .SystemIsNormal}}正常{{else}}异常,点击查看{{end}}</a></span></p>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="am-u-lg-3 am-u-md-6 am-u-sm-12">
+            <div class="dashboard-stat blue">
+                <div class="visual">
+                    <i class="am-icon-comments-o"></i>
+                </div>
+                <div class="details">
+                    <div class="number">{{ .coinCount }}</div>
+                    <div class="desc"> 数字资产</div>
+                </div>
+                <a class="more" href='{{ urlfor "CoinController.CoinList" }}'> 查看更多
+                    <i class="m-icon-swapright m-icon-white"></i>
+                </a>
+            </div>
+        </div>
+        <div class="am-u-lg-3 am-u-md-6 am-u-sm-12">
+            <div class="dashboard-stat green">
+                <div class="visual">
+                    <i class="am-icon-user"></i>
+                </div>
+                <div class="details">
+                    <div class="number"> {{ .withdrawCount }}</div>
+                    <div class="desc"> 提现数量</div>
+                </div>
+                <a class="more" href='{{ urlfor "WithdrawController.StartWithdrawList" }}'> 查看更多
+                    <i class="m-icon-swapright m-icon-white"></i>
+                </a>
+            </div>
+        </div>
+
+        <div class="am-u-lg-3 am-u-md-6 am-u-sm-12">
+            <div class="dashboard-stat red">
+                <div class="visual">
+                    <i class="am-icon-money"></i>
+                </div>
+                <div class="details">
+                    <div class="number"> {{.transactionCount}}</div>
+                    <div class="desc"> 充值申请</div>
+                </div>
+                <a class="more" href='{{ urlfor "TransactionController.TransactionStart" }}'> 查看更多
+                    <i class="m-icon-swapright m-icon-white"></i>
+                </a>
+            </div>
+        </div>
+
+        <div class="am-u-lg-3 am-u-md-6 am-u-sm-12">
+            <div class="dashboard-stat purple">
+                <div class="visual">
+                    <i class="am-icon-connectdevelop"></i>
+                </div>
+                <div class="details">
+                    <div class="number">
+                        {{ if .isLive }}
+                        <i class="am-icon-support"></i> 节点正常
+                        {{else}}
+                        <i class="am-icon-warning"></i> 节点异常
+                        {{end}}
+                    </div>
+                    <div class="desc">区块同步至 <span class="label label-info">{{.currentHigh}}</span> 高度</div>
+                </div>
+                <a class="more" href="#">
+                    查看更多
+                    <i class="m-icon-swapright m-icon-white"></i>
+                </a>
+            </div>
+        </div>
+
+
+    </div>
+
+
+
+    <div class="row">
+        <div class="am-u-md-6 am-u-sm-12 row-mb">
+
+            <div class="tpl-portlet">
+                <div class="tpl-portlet-title">
+                    <div class="tpl-caption font-green ">
+                        <span>信息汇总</span>
+                    </div>
+
+                </div>
+
+                <div class="am-tabs tpl-index-tabs" data-am-tabs>
+                    <ul class="am-tabs-nav am-nav am-nav-tabs">
+                        <li class="am-active"><a href="#tab11">主账户明细</a></li>
+                        <li><a href="#tab22">今日汇总明细</a></li>
+                    </ul>
+
+                    <div class="am-tabs-bd">
+                        <div class="am-tab-panel am-fade am-in am-active" id="tab11">
+                            <div id="wrapper" class="wrapper">
+                                <div id="scroller" class="scroller">
+                                    <ul class="tpl-task-list tpl-task-remind">
+                                        <label>主账户:[<a target="_blank" href="https://etherscan.io/address/0x{{.mainAccountAddress}}">0x{{.mainAccountAddress}}</a>]</label>
+                                        <table class="am-table am-table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th>代币名称</th>
+                                                <th>合约地址</th>
+                                                <th>余额</th>
+                                                <th>操作</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            {{ range .coins }}
+
+                                            <tr>
+                                                <td>{{ .Name }}</td>
+                                                <td><a href="https://etherscan.io/token/{{ .ContractAddress }}" target="_blank">{{ substr .ContractAddress 0 10 }}...</a></td>
+                                                <td>{{ .Balance.String }}</td>
+                                                <td>
+                                                    <button type="button" class="am-btn-xs am-btn-primary" onclick='transfer()'>转账</button>
+                                                </td>
+                                            </tr>
+
+                                            {{ end }}
+                                            </tbody>
+                                        </table>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="am-tab-panel am-fade" id="tab22">
+                            <div id="wrapper" class="wrapper">
+                                <div id="scroller" class="scroller">
+                                    <ul class="tpl-task-list tpl-task-remind">
+
+                                        <table class="am-table">
+                                            <thead>
+                                            <tr>
+                                                <th>代币名称</th>
+                                                <th>已完成</th>
+                                                <th>操作</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+
+                                            {{ range $index,$item := .coinSummaryMap }}
+                                            <tr>
+                                                <td>{{$index}}</td>
+                                                <td>{{$item}}</td>
+                                                <td><a class="am-btn am-btn-primary" href='{{urlfor "SummaryController.SummaryDetailList"}}'>详情</a> </td>
+                                            </tr>
+                                            {{end}}
+                                            </tbody>
+                                        </table>
+
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="am-u-md-6 am-u-sm-12 row-mb">
+            <div class="tpl-portlet">
+                <div class="tpl-portlet-title">
+                    <div class="tpl-caption font-green ">
+                        <span>汇总计划任务</span>
+                    </div>
+
+                </div>
+
+                <div class="am-tabs tpl-index-tabs" data-am-tabs>
+                    <ul class="am-tabs-nav am-nav am-nav-tabs">
+                        <li class="am-active"><a href="#tab1">进行中</a></li>
+                    </ul>
+
+                    <div class="am-tabs-bd">
+                        <div class="am-tab-panel am-fade am-in am-active" id="tab1">
+                            <div id="wrapperA" class="wrapper">
+                                <div id="scroller" class="scroller">
+                                    <ul class="tpl-task-list tpl-task-remind task-ing-list">
+
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+</div>
+
+</div>
+<div class="am-modal am-modal-prompt" tabindex="-1" id="transfer-modal">
+    <div class="am-modal-dialog">
+        <div class="am-modal-hd">从主账户转账</div>
+        <div class="am-modal-bd">
+            <select class="am-modal-prompt-input">
+                <option value="option1">选择转账的资产类型</option>
+                {{ range .coins }}
+                <option value="{{ .Name }}">{{ .Name }}</option>
+                {{ end }}
+            </select>
+            <!--<input type="text" class="am-modal-prompt-input" placeholder="资产类型">-->
+            <input type="text" class="am-modal-prompt-input" placeholder="转账地址">
+            <input type="text" class="am-modal-prompt-input" value="" placeholder="转账金额">
+            <input type="password" class="am-modal-prompt-input" placeholder="主账户密码">
+            <input type="text" class="am-modal-prompt-input" placeholder="备注">
+            <font size="2">手续费 = GasPrice * Gas [参考值 6000000000 * 21000 = 0.000126eth]</font>
+        </div>
+        <div class="am-modal-footer">
+            <span class="am-modal-btn" data-am-modal-cancel>取消</span>
+            <span class="am-modal-btn" data-am-modal-confirm>提交</span>
+        </div>
+    </div>
+</div>

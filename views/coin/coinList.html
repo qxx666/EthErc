@@ -1,0 +1,95 @@
+<div class="tpl-content-wrapper">
+    <div class="tpl-content-page-title">
+        数字资产列表
+    </div>
+    <ol class="am-breadcrumb">
+        <li><a href="#" class="am-icon-home">首页</a></li>
+        <li class="am-active">数字资产列表</li>
+    </ol>
+    <div class="tpl-portlet-components">
+        <div class="portlet-title">
+            <div class="caption font-green bold">
+                <span class="am-icon-code"></span> 数字资产列表
+            </div>
+        </div>
+        <div class="tpl-block">
+            <div class="am-g">
+                <div class="am-u-sm-12 am-u-md-6">
+                    <div class="am-btn-toolbar">
+                        <div class="am-btn-group am-btn-group-xs">
+                            <button type="button" class="am-btn am-btn-default am-btn-success" onclick="createAccounts();"><span class="am-icon-plus"></span> 生成地址
+                            </button>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="am-g">
+                <div class="am-u-sm-12">
+                    <form class="am-form">
+                        <table class="am-table am-table-striped am-table-hover table-main">
+                            <thead>
+                            <tr>
+                                <th class="table-id">ID</th>
+                                <th class="table-title">代币名称</th>
+                                <th class="table-title">合约地址</th>
+                                <th class="table-type">是否允许充值</th>
+                                <th class="table-type">到账确认数</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+
+                            {{range $index, $elem := .coins}}
+
+                            <tr>
+                                <td>{{ $index }}</td>
+                                <td>{{ .Name }}</td>
+                                <td><a href="https://etherscan.io/token/{{ .ContractAddress }}" target="_blank">{{ .ContractAddress }}</a></td>
+                                <td>{{ .IsRecharge_S }}</td>
+                                <td class="am-hide-sm-only">{{ .Confirm }}</td>
+                            </tr>
+
+                            {{end}}
+
+                            </tbody>
+                        </table>
+                        <div class="am-cf">
+
+
+                        </div>
+                        <hr>
+
+                    </form>
+                </div>
+
+            </div>
+        </div>
+        <div class="tpl-alert"></div>
+    </div>
+
+
+</div>
+
+<div class="am-modal am-modal-prompt" tabindex="-1" id="create-account-modal">
+    <div class="am-modal-dialog">
+        <div class="am-modal-hd">输入生成数量</div>
+        <div class="am-modal-bd">
+            <select class="am-modal-prompt-input">
+                <option>选择生成的资产类型</option>
+                {{ range .coins }}
+                {{ if eq .Name "ETH"}}
+                    <option value="{{ .Name }}">{{ .Name }}</option>
+                {{ end }}
+                {{ end }}
+            </select>
+            <input type="text" class="am-modal-prompt-input" id="account_number">
+        </div>
+        <div class="am-modal-footer">
+            <span class="am-modal-btn" data-am-modal-cancel>取消</span>
+            <span class="am-modal-btn" onclick="createAccounts()" data-am-modal-confirm>生成</span>
+        </div>
+    </div>
+</div>

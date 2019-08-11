@@ -1,0 +1,86 @@
+<div class="tpl-content-wrapper">
+    <div class="tpl-content-page-title">
+        从主账户转账
+    </div>
+    <ol class="am-breadcrumb">
+        <li><a href="#" class="am-icon-home">首页</a></li>
+        <li><a href="#">从主账户转账</a></li>
+    </ol>
+    <div class="tpl-portlet-components">
+        <div class="portlet-title">
+            <div class="caption font-green bold">
+                <span class="am-icon-code"></span> 主账户转账
+            </div>
+
+        </div>
+        <div class="tpl-block ">
+
+            <div class="am-g tpl-amazeui-form">
+
+
+                <div class="am-u-sm-12 am-u-md-9">
+                    <form class="am-form am-form-horizontal transfer-token-form">
+                        <div class="am-form-group">
+                            <label for="user-name" class="am-u-sm-3 am-form-label">资产类型 / Token Name</label>
+                            <div class="am-u-sm-9">
+
+                                <select class="am-modal-prompt-input" name="coinType">
+                                    <option value="option1">选择转账的资产类型</option>
+                                {{ range .coins }}
+                                    <option value="{{ .Name }}">{{ .Name }} -- 余额:{{ .Balance.String }}</option>
+                                {{ end }}
+                                </select>
+
+                            </div>
+                        </div>
+
+                        <div class="am-form-group">
+                            <label for="user-email" class="am-u-sm-3 am-form-label">接收地址 / To Address</label>
+                            <div class="am-u-sm-9">
+                                <input type="text" name="address" id="user-email" placeholder="请输入接收资产的地址">
+                            </div>
+                        </div>
+
+                        <div class="am-form-group">
+                            <label for="user-phone" class="am-u-sm-3 am-form-label">金额 / Amount</label>
+                            <div class="am-u-sm-9">
+                                <input type="text" name="fees" id="user-phone" placeholder="请输入转账金额">
+                            </div>
+                        </div>
+
+                        <div class="am-form-group">
+                            <label for="user-QQ" class="am-u-sm-3 am-form-label">密码 / Password</label>
+                            <div class="am-u-sm-9">
+                                <input type="password" name="password" pattern="[0-9]*" id="user-QQ" placeholder="请输入主账户密码">
+                            </div>
+                        </div>
+
+                        <div class="am-form-group">
+                            <label for="user-weibo" class="am-u-sm-3 am-form-label">备注 / Remark</label>
+                            <div class="am-u-sm-9">
+                                <input type="text" name="remark" id="user-weibo" placeholder="备注">
+                            </div>
+                        </div>
+
+                        <div class="am-form-group">
+                            <div class="am-u-sm-9 am-u-sm-push-3">
+                                <button type="button" class="am-btn am-btn-primary" onclick="transferForm();">提交转账</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+
+
+
+
+
+
+
+
+</div>

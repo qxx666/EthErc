@@ -1,0 +1,126 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>22COIN - 数字资产管理系统</title>
+    <meta name="keywords" content="index">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="Cache-Control" content="no-siteapp"/>
+    <link rel="icon" type="image/png" href="/assets/i/favicon.png">
+    <link rel="apple-touch-icon-precomposed" href="/assets/i/app-icon72x72@2x.png">
+    <meta name="apple-mobile-web-app-title" content="Amaze UI"/>
+    <link rel="stylesheet" href="/assets/css/amazeui.min.css"/>
+    <link rel="stylesheet" href="/assets/css/admin.css">
+    <link rel="stylesheet" href="/assets/css/app.css">
+</head>
+
+<body data-type="login">
+
+<div class="am-g myapp-login">
+    <div class="myapp-login-logo-block  tpl-login-max">
+        <div class="myapp-login-logo-text">
+            <div class="myapp-login-logo-text">
+                <span>初始化设置</span>
+            </div>
+        </div>
+
+        <div class="login-font">
+            <i><a href="http://www.22COIN.com">www.22COIN.com</a></i>
+        </div>
+        <div class="am-u-sm-10 login-am-center">
+            <form class="am-form init-setting-form">
+                {{ .xsrfdata }}
+                <fieldset>
+                    <div class="am-form-group">
+                        <input type="text" class="" name="RpcHost" placeholder="输入钱包rpc地址 如：http://127.0.0.1:123456">
+                    </div>
+                    <div class="am-form-group">
+                        <input type="text" class="" name="MainAccountPwd" placeholder="汇总账户密码 6-12位 请记得妥善保存">
+                    </div>
+                    <div class="am-form-group">
+                        <input type="text" class="" name="MemberPwd" placeholder="会员账户密码 6-12位 请记得妥善保存">
+                    </div>
+                    <div class="am-form-group">
+                        <input type="text" class="" name="CurrentBlockNumber" placeholder="当前以太坊网络的区块高度">
+                    </div>
+                </fieldset>
+                <fieldset>
+
+                    <div class="am-form-group">
+                        <input type="text" class="" name="DatabaseHost" placeholder="数据库地址 127.0.0.1">
+                    </div>
+                    <div class="am-form-group">
+                        <input type="text" class="" name="DatabaseUser" placeholder="数据库用户 root">
+                    </div>
+                    <div class="am-form-group">
+                        <input type="text" class="" name="DatabasePwd" placeholder="数据库密码 root">
+                    </div>
+                    <div class="am-form-group">
+                        <input type="text" class="" name="DatabaseName" placeholder="数据库名 database">
+                    </div>
+
+                    <p>
+                        <button type="button" onclick="initSetting()" class="am-btn am-btn-default">确认</button>
+                    </p>
+                </fieldset>
+
+            </form>
+        </div>
+    </div>
+</div>
+
+<script src="/assets/js/jquery.min.js"></script>
+<script src="https://cdn.bootcss.com/layer/3.0.3/layer.js"></script>
+<script src="/assets/js/amazeui.min.js"></script>
+<script src="/assets/js/app.js"></script>
+<script src="/assets/js/common.js"></script>
+
+
+<footer data-am-widget="footer"
+        class="am-footer am-footer-default"
+        data-am-footer="{  }">
+    <div class="am-footer-switch">
+    <span class="am-footer-ysp" data-rel="mobile"
+          data-am-modal="{target: '#am-switch-mode'}">
+          云适配版
+    </span>
+        <span class="am-footer-divider"> | </span>
+        <a id="godesktop" data-rel="desktop" class="am-footer-desktop" href="javascript:">
+            电脑版
+        </a>
+    </div>
+    <div class="am-footer-miscs ">
+
+        <p>由 <a href="http://www.22COIN.com/" title="22COIN网络科技有限公司"
+                target="_blank" class="">22COIN网络科技有限公司</a>
+            提供技术支持</p>
+        <p>CopyRight©2017 22COIN Inc.</p>
+    </div>
+</footer>
+
+<div id="am-footer-modal"
+     class="am-modal am-modal-no-btn am-switch-mode-m am-switch-mode-m-default">
+    <div class="am-modal-dialog">
+        <div class="am-modal-hd am-modal-footer-hd">
+            <a href="javascript:void(0)" data-dismiss="modal" class="am-close am-close-spin " data-am-modal-close>&times;</a>
+        </div>
+        <div class="am-modal-bd">
+            您正在浏览的是
+
+            <span class="am-switch-mode-owner">
+            云适配
+        </span>
+
+            <span class="am-switch-mode-slogan">
+              为您当前手机订制的移动网站。
+        </span>
+        </div>
+    </div>
+</div>
+</body>
+
+
+</html>

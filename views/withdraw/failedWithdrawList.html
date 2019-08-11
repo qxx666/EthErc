@@ -1,0 +1,103 @@
+<div class="tpl-content-wrapper">
+    <div class="tpl-content-page-title">
+        提现管理
+    </div>
+    <ol class="am-breadcrumb">
+        <li><a href="#" class="am-icon-home">首页</a></li>
+        <li><a href="#">提现管理</a></li>
+        <li class="am-active">提现失败列表</li>
+    </ol>
+    <div class="tpl-portlet-components">
+        <div class="portlet-title">
+            <div class="caption font-green bold">
+                <span class="am-icon-code"></span> 提现失败列表
+            </div>
+            <div class="tpl-portlet-input tpl-fz-ml">
+                <div class="portlet-input input-small input-inline">
+                    <div class="input-icon right">
+                        <i class="am-icon-search"></i>
+                        <input type="text" class="form-control form-control-solid withDrawSearch" placeholder="输入地址搜索..."> </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="tpl-block">
+            <div class="am-g">
+                <div class="am-u-sm-12 am-u-md-6">
+                    <div class="am-btn-toolbar">
+                        <div class="am-btn-group am-btn-group-xs">
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+
+            <div class="am-g">
+                <div class="am-u-sm-12">
+                    <form class="am-form">
+                        <table class="am-table am-table-striped am-table-hover table-main">
+                            <thead>
+                            <tr>
+                                <th class="table-title">代币</th>
+                                <th class="table-title">地址</th>
+                                <th class="table-type">金额</th>
+                                <th class="table-type">备注</th>
+                                <th class="table-type">错误</th>
+                                <th class="table-type">状态</th>
+                                <th class="table-author am-hide-sm-only">创建时间</th>
+                                <th class="table-author am-hide-sm-only">更新时间</th>
+                                <th class="table-type">操作</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+
+                            {{range $index,$item := .withdrawLogs}}
+
+                            <tr>
+                                <td>{{ .CoinName }}</td>
+                                <td>{{ .ToAddress }}</td>
+                                <td>{{ .Amount }}</td>
+                                <td>{{ .Remark }}</td>
+                                <td>{{ .Error }}</td>
+                                <td>{{ .GetType_S }}</td>
+                                <td class="am-hide-sm-only">{{ date .CreatedAt "Y-m-d H:i:s"}}</td>
+                                <td class="am-hide-sm-only">{{ date .UpdatedAt "Y-m-d H:i:s"}}</td>
+                                <td><button class="am-btn-sm tpl-color-danger" onclick="reWithdraw({{.Id.Hex}})" type="button">重新转账</button></td>
+                            </tr>
+
+                            {{end}}
+
+                            </tbody>
+                        </table>
+                        <div class="am-cf">
+
+                            <div class="am-fr">
+                                <ul class="am-pagination tpl-pagination">
+                                {{ with .withdrawLogsPage}}
+
+                                    <li {{ if .FirstPage }} class="am-disabled" {{ end }}><a
+                                            href='?page={{ .PrePage }}'>«</a></li>
+
+                                {{ str2html .PageHtml }}
+
+                                    <li {{ if .LastPage }} class="am-disabled" {{ end }}><a
+                                            href='?page={{ .NextPage }}'>»</a></li>
+
+                                {{end}}
+
+                                </ul>
+                            </div>
+                        </div>
+                        <hr>
+
+                    </form>
+                </div>
+
+            </div>
+        </div>
+        <div class="tpl-alert"></div>
+    </div>
+
+
+</div>

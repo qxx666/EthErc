@@ -1,0 +1,93 @@
+<div class="tpl-content-wrapper">
+    <div class="tpl-content-page-title">
+        充值管理
+    </div>
+    <ol class="am-breadcrumb">
+        <li><a href="#" class="am-icon-home">首页</a></li>
+        <li><a href="#">充值管理</a></li>
+        <li class="am-active">未确认充值列表</li>
+    </ol>
+    <div class="tpl-portlet-components">
+        <div class="portlet-title">
+            <div class="caption font-green bold">
+                <span class="am-icon-code"></span> 未确认充值列表
+            </div>
+        </div>
+        <div class="tpl-block">
+            <div class="am-g">
+                <div class="am-u-sm-12 am-u-md-6">
+                    <div class="am-btn-toolbar">
+                        <div class="am-btn-group am-btn-group-xs">
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+
+            <div class="am-g">
+                <div class="am-u-sm-12">
+                    <form class="am-form">
+                        <table class="am-table am-table-striped am-table-hover table-main">
+                            <thead>
+                            <tr>
+                                <th class="table-title">交易Hash</th>
+                                <th class="table-title">代币</th>
+                                <th class="table-type">转入</th>
+                                <th class="table-type">转出</th>
+                                <th class="table-type">金额</th>
+                                <th class="table-type">确认数</th>
+                                <th class="table-type">状态</th>
+                                <th class="table-author am-hide-sm-only">创建时间</th>
+                                <th class="table-author am-hide-sm-only">更新时间</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+
+                            {{range $index,$item := .transactions}}
+
+                            <tr>
+                                <td><a target="_blank" href="https://etherscan.io/tx/{{.Tx}}">{{ substr .Tx 0 20 }}..</a></td>
+                                <td>{{ .CoinName }}</td>
+                                <td><a target="_blank" href="https://etherscan.io/address/{{.From}}">{{ substr .From 0 20 }}..</a></td>
+                                <td><a target="_blank" href="https://etherscan.io/address/{{.To}}">{{ substr .To 0 20 }}..</a></td>
+                                <td>{{ if gt .TransactionType 0 }} {{.TokenValue}} {{ else }} {{.EthValue}} {{ end }}</td>
+                                <td>{{.GetConfirm}}</td>
+                                <td>{{ .GetType_S }}</td>
+                                <td class="am-hide-sm-only">{{ date .CreatedAt "Y-m-d H:i:s"}}</td>
+                                <td class="am-hide-sm-only">{{ date .UpdatedAt "Y-m-d H:i:s"}}</td>
+                            </tr>
+
+                            {{end}}
+
+                            </tbody>
+                        </table>
+                        <div class="am-cf">
+
+                            <div class="am-fr">
+                                <ul class="am-pagination tpl-pagination">
+                                    {{ with .transactionPage}}
+
+                                    <li {{ if .FirstPage }} class="am-disabled" {{ end }}><a href='?page={{ .PrePage }}'>«</a></li>
+
+                                    {{ str2html .PageHtml }}
+
+                                    <li {{ if .LastPage }} class="am-disabled" {{ end }}><a href='?page={{ .NextPage }}'>»</a></li>
+
+                                    {{end}}
+
+                                </ul>
+                            </div>
+                        </div>
+                        <hr>
+
+                    </form>
+                </div>
+
+            </div>
+        </div>
+        <div class="tpl-alert"></div>
+    </div>
+
+
+</div>

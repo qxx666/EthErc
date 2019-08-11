@@ -1,0 +1,164 @@
+<div class="tpl-left-nav tpl-left-nav-hover">
+    <div class="tpl-left-nav-title">
+        22COIN
+    </div>
+    <div class="tpl-left-nav-list">
+        <ul class="tpl-left-nav-menu">
+            <li class="tpl-left-nav-item">
+                <a href='{{ urlfor "MainController.Index" }}' class="nav-link">
+                    <i class="am-icon-home"></i>
+                    <span>首页</span>
+                </a>
+            </li>
+            <li class="tpl-left-nav-item">
+                <a href='{{ urlfor "AccountController.AccountList" }}' class="nav-link tpl-left-nav-link-list">
+                    <i class="am-icon-users"></i>
+                    <span>会员账户列表</span>
+                    <!--<i class="tpl-left-nav-content tpl-badge-danger">12</i>-->
+                </a>
+            </li>
+            <li class="tpl-left-nav-item">
+                <a href='{{ urlfor "CoinController.CoinList" }}' class="nav-link tpl-left-nav-link-list">
+                    <i class="am-icon-money"></i>
+                    <span>数字资产列表</span>
+                    <!--<i class="tpl-left-nav-content tpl-badge-danger">12</i>-->
+                </a>
+            </li>
+
+            <li class="tpl-left-nav-item">
+                <a href='{{ urlfor "TransferController.Transfer" }}' class="nav-link tpl-left-nav-link-list">
+                    <i class="am-icon-outdent"></i>
+                    <span>从主账户转账</span>
+                    <!--<i class="tpl-left-nav-content tpl-badge-danger">12</i>-->
+                </a>
+            </li>
+
+            <li class="tpl-left-nav-item">
+                <a href="javascript:;" class="nav-link tpl-left-nav-link-list">
+                    <i class="am-icon-inbox"></i>
+                    <span>充值管理</span>
+                    <!--// tpl-left-nav-more-ico-rotate-->
+                    <i class="am-icon-angle-right tpl-left-nav-more-ico am-fr am-margin-right"></i>
+                </a>
+                <ul class="tpl-left-nav-sub-menu" style="display: none;">
+                    <li>
+                        <a href='{{ urlfor "TransactionController.TransactionStart" }}'>
+                            <i class="am-icon-angle-right"></i>
+                            <span>未确认充值列表</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href='{{ urlfor "TransactionController.TransactionFinish" }}'>
+                            <i class="am-icon-angle-right"></i>
+                            <span>已确认充值列表</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+
+            <li class="tpl-left-nav-item">
+                <a href="javascript:;" class="nav-link tpl-left-nav-link-list">
+                    <i class="am-icon-wheelchair"></i>
+                    <span>提现管理</span>
+                    <!--// tpl-left-nav-more-ico-rotate-->
+                    <i class="am-icon-angle-right tpl-left-nav-more-ico am-fr am-margin-right"></i>
+                </a>
+                <ul class="tpl-left-nav-sub-menu" style="display: none;">
+                    <li>
+                        <a href='{{ urlfor "WithdrawController.StartWithdrawList" }}'>
+                            <i class="am-icon-angle-right"></i>
+                            <span>未处理提现列表</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href='{{ urlfor "WithdrawController.FinishWithdrawList" }}'>
+                            <i class="am-icon-angle-right"></i>
+                            <span>已完成提现列表</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href='{{ urlfor "WithdrawController.FailedWithdrawList" }}'>
+                            <i class="am-icon-angle-right"></i>
+                            <span>提现失败列表</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+
+            <li class="tpl-left-nav-item">
+                <a href="javascript:;" class="nav-link tpl-left-nav-link-list">
+                    <i class="am-icon-support"></i>
+                    <span>汇总管理</span>
+                    <!--// tpl-left-nav-more-ico-rotate-->
+                    <i class="am-icon-angle-right tpl-left-nav-more-ico am-fr am-margin-right"></i>
+                </a>
+                <ul class="tpl-left-nav-sub-menu" style="display: none;">
+                    <li>
+                        <a href='{{ urlfor "SummaryController.SummaryingList" }}'>
+                            <i class="am-icon-angle-right"></i>
+                            <span>未完成汇总列表</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href='{{ urlfor "SummaryController.SummaryFinishList" }}'>
+                            <i class="am-icon-angle-right"></i>
+                            <span>已完成汇总列表</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href='{{ urlfor "SummaryController.SummaryDetailList" }}'>
+                            <i class="am-icon-angle-right"></i>
+                            <span>汇总详情列表</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+
+            <li class="tpl-left-nav-item">
+                <a href="javascript:;" class="nav-link tpl-left-nav-link-list">
+                    <i class="am-icon-table"></i>
+                    <span>日志管理</span>
+                    <i class="am-icon-angle-right tpl-left-nav-more-ico am-fr am-margin-right"></i>
+                </a>
+                <ul class="tpl-left-nav-sub-menu">
+                    <li>
+                        <a href='{{ urlfor "LogController.LogList" }}'>
+                            <i class="am-icon-angle-right"></i>
+                            <span>系统日志列表</span>
+                        </a>
+
+                    </li>
+                </ul>
+            </li>
+
+            <li class="tpl-left-nav-item">
+                <a href="javascript:;" class="nav-link tpl-left-nav-link-list">
+                    <i class="am-icon-contao"></i>
+                    <span>系统设置</span>
+                    <!--// tpl-left-nav-more-ico-rotate-->
+                    <i class="am-icon-angle-right tpl-left-nav-more-ico am-fr am-margin-right"></i>
+                </a>
+                <ul class="tpl-left-nav-sub-menu" style="display: none;">
+                    <li>
+                        <a href='{{ urlfor "SettingController.ManagerList" }}'>
+                            <i class="am-icon-angle-right"></i>
+                            <span>管理员设置</span>
+                        </a>
+
+                        <a href='{{ urlfor "SettingController.SummarySetting" }}'>
+                            <i class="am-icon-angle-right"></i>
+                            <span>汇总充值设置</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+
+            <li class="tpl-left-nav-item">
+                <a href='{{ urlfor "PublicController.Logout" }}' class="nav-link tpl-left-nav-link-list">
+                    <i class="am-icon-sign-out"></i>
+                    <span>退出登录</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>
