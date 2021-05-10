@@ -4,8 +4,8 @@
 package models
 
 import (
-	"encoding/json"
 	"EthErc/utils"
+	"encoding/json"
 	"github.com/astaxie/beego"
 	"gopkg.in/mgo.v2/bson"
 )
@@ -39,13 +39,11 @@ func SysSetting() *Setting {
 
 		setDb := mongo.DB("asset").C("settings")
 		err := setDb.Find(bson.M{}).One(&setting)
-
 		if err != nil {
 			beego.Error(err.Error())
 			return nil
 		}
-		mainPwd, _ := utils.RsaDecrypt([]byte(setting.MainAccountPwd))
-
+		mainPwd, err := utils.RsaDecrypt([]byte(setting.MainAccountPwd))
 		if err != nil {
 			beego.Error(err.Error())
 			return nil
@@ -72,7 +70,7 @@ func GetMainAddress() string {
 	}
 	ac := account{}
 	if MainAddress == "" {
-		json.Unmarshal([]byte(SysSetting().MainAccount), &ac)
+		_ = json.Unmarshal([]byte(SysSetting().MainAccount), &ac)
 		MainAddress = ac.Address
 	}
 	return MainAddress
@@ -80,7 +78,6 @@ func GetMainAddress() string {
 
 func UpdateRechargeStatus() error {
 	setting := Setting{}
-
 	mongo := utils.Mongo()
 	defer mongo.Close()
 

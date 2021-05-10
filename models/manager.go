@@ -72,14 +72,15 @@ func (self *Manager) AddManager() error {
 
 	managersDb := mongo.DB("asset").C("managers")
 	err := managersDb.Find(bson.M{"username": self.Username}).One(self)
-
 	if err == nil {
 		return errors.New("用户已经存在")
 	}
+
 	passHash, err := utils.PasswordHash(self.Password)
 	if err != nil {
 		return errors.New("请重新输入密码")
 	}
+
 	self.Password = passHash
 	self.CreatedAt = time.Now()
 	self.UpdatedAt = time.Now()

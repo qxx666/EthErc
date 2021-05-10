@@ -1,0 +1,4 @@
+## mongo
+asset
+    managers
+    settings

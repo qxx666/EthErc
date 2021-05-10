@@ -10,8 +10,9 @@ func Mongo() *mgo.Session {
 	mongoDBDialInfo := &mgo.DialInfo{
 		Addrs:   []string{beego.AppConfig.String("mongodb_url")},
 		Timeout: 60 * time.Second,
-		//Database: AuthDatabase,
-		//Username: AuthUserName,
+		Database: beego.AppConfig.String("mongo_db"),
+		Username: beego.AppConfig.String("mongo_username"),
+		Password: beego.AppConfig.String("mongo_db_passwd"),
 	}
 
 	// to our MongoDB.

@@ -51,11 +51,11 @@ func TransferEth(
 		gasPrice = gasPriceO
 	}
 
-	var gas *big.Int
-	if gasO == nil {
-		gas = new(big.Int).SetUint64(params.TxGas)
+	var gas uint64
+	if gasO == nil  {
+		gas = params.TxGas
 	} else {
-		gas = gasO
+		gas = gasO.Uint64()
 	}
 
 	data := common.FromHex("0x")
@@ -67,7 +67,7 @@ func TransferEth(
 		gas,
 		gasPrice,
 		data)
-	signer := types.NewEIP155Signer(params.MainnetChainConfig.ChainId)
+	signer := types.NewEIP155Signer(params.MainnetChainConfig.ChainID)
 
 	//signer := types.HomesteadSigner{}
 	txs, err := types.SignTx(rawTx, signer, key.PrivateKey)

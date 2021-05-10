@@ -4,9 +4,9 @@ import (
 	"github.com/ethereum/go-ethereum/accounts/abi"
 	"github.com/ethereum/go-ethereum/accounts/abi/bind"
 	"github.com/ethereum/go-ethereum/common"
+	"github.com/ethereum/go-ethereum/core/types"
 	"math/big"
 	"strings"
-	"github.com/ethereum/go-ethereum/core/types"
 )
 
 // TokenABI is the input ABI used to generate the binding from.
@@ -98,7 +98,7 @@ func bindToken(address common.Address, caller bind.ContractCaller, transactor bi
 	if err != nil {
 		return nil, err
 	}
-	return bind.NewBoundContract(address, parsed, caller, transactor), nil
+	return bind.NewBoundContract(address, parsed, caller, transactor, nil), nil
 }
 
 // Call invokes the (constant) contract method with params as input values and
@@ -106,7 +106,9 @@ func bindToken(address common.Address, caller bind.ContractCaller, transactor bi
 // returns, a slice of interfaces for anonymous returns and a struct for named
 // returns.
 func (_Token *TokenRaw) Call(opts *bind.CallOpts, result interface{}, method string, params ...interface{}) error {
-	return _Token.Contract.TokenCaller.contract.Call(opts, result, method, params...)
+	var res []interface{}
+	res = append(res, result)
+	return _Token.Contract.TokenCaller.contract.Call(opts, &res, method, params...)
 }
 
 // Transfer initiates a plain transaction to move funds to the contract, calling
@@ -125,7 +127,9 @@ func (_Token *TokenRaw) Transact(opts *bind.TransactOpts, method string, params 
 // returns, a slice of interfaces for anonymous returns and a struct for named
 // returns.
 func (_Token *TokenCallerRaw) Call(opts *bind.CallOpts, result interface{}, method string, params ...interface{}) error {
-	return _Token.Contract.contract.Call(opts, result, method, params...)
+	var res []interface{}
+	res = append(res, result)
+	return _Token.Contract.contract.Call(opts, &res, method, params...)
 }
 
 // Transfer initiates a plain transaction to move funds to the contract, calling
@@ -147,7 +151,8 @@ func (_Token *TokenCaller) Allowance(opts *bind.CallOpts, arg0 common.Address, a
 		ret0 = new(*big.Int)
 	)
 	out := ret0
-	err := _Token.contract.Call(opts, out, "allowance", arg0, arg1)
+	outs := []interface{}{out}
+	err := _Token.contract.Call(opts, &outs, "allowance", arg0, arg1)
 	return *ret0, err
 }
 
@@ -173,7 +178,8 @@ func (_Token *TokenCaller) BalanceOf(opts *bind.CallOpts, arg0 common.Address) (
 		ret0 = new(*big.Int)
 	)
 	out := ret0
-	err := _Token.contract.Call(opts, out, "balanceOf", arg0)
+	outs := []interface{}{out}
+	err := _Token.contract.Call(opts, &outs, "balanceOf", arg0)
 	return *ret0, err
 }
 
@@ -199,7 +205,8 @@ func (_Token *TokenCaller) Decimals(opts *bind.CallOpts) (uint8, error) {
 		ret0 = new(uint8)
 	)
 	out := ret0
-	err := _Token.contract.Call(opts, out, "decimals")
+	outs := []interface{}{out}
+	err := _Token.contract.Call(opts, &outs, "decimals")
 	return *ret0, err
 }
 
@@ -225,7 +232,8 @@ func (_Token *TokenCaller) Name(opts *bind.CallOpts) (string, error) {
 		ret0 = new(string)
 	)
 	out := ret0
-	err := _Token.contract.Call(opts, out, "name")
+	outs := []interface{}{out}
+	err := _Token.contract.Call(opts, &outs, "name")
 	return *ret0, err
 }
 
@@ -251,7 +259,8 @@ func (_Token *TokenCaller) SpentAllowance(opts *bind.CallOpts, arg0 common.Addre
 		ret0 = new(*big.Int)
 	)
 	out := ret0
-	err := _Token.contract.Call(opts, out, "spentAllowance", arg0, arg1)
+	outs := []interface{}{out}
+	err := _Token.contract.Call(opts, &outs, "spentAllowance", arg0, arg1)
 	return *ret0, err
 }
 
@@ -277,7 +286,8 @@ func (_Token *TokenCaller) Symbol(opts *bind.CallOpts) (string, error) {
 		ret0 = new(string)
 	)
 	out := ret0
-	err := _Token.contract.Call(opts, out, "symbol")
+	outs := []interface{}{out}
+	err := _Token.contract.Call(opts, &outs, "symbol")
 	return *ret0, err
 }
 
