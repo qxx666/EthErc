@@ -1,11 +1,11 @@
 /**
 管理员 表
- */
+*/
 package models
 
 import (
-	"errors"
 	"EthErc/utils"
+	"errors"
 	"gopkg.in/mgo.v2/bson"
 	"time"
 )

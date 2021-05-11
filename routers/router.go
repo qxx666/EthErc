@@ -3,7 +3,6 @@ package routers
 import (
 	"EthErc/controllers"
 	"github.com/astaxie/beego"
-	"github.com/astaxie/beego/context"
 )
 
 func init() {
@@ -77,12 +76,12 @@ func init() {
 
 	beego.AddNamespace(public, admin)
 	//是否登录，过滤器
-	var FilterUser = func(ctx *context.Context) {
-		_, ok := ctx.Input.Session("IsLogin").(bool)
-		if !ok && ctx.Request.RequestURI != "/public/login.html" {
-			ctx.Redirect(302, "/public/login.html")
-		}
-	}
-	beego.InsertFilter("/admin/*", beego.BeforeRouter, FilterUser)
+	//var FilterUser = func(ctx *context.Context) {
+	//	_, ok := ctx.Input.Session("IsLogin").(bool)
+	//	if !ok && ctx.Request.RequestURI != "/public/login.html" {
+	//		ctx.Redirect(302, "/public/login.html")
+	//	}
+	//}
+	//beego.InsertFilter("/admin/*", beego.BeforeRouter, FilterUser)
 
 }
