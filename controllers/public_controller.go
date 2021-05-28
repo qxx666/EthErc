@@ -20,7 +20,6 @@ func (self *PublicController) InitSetting() {
 	setting := models.Setting{}
 	settingDb := mongo.DB("asset").C("settings")
 	err := settingDb.Find(bson.M{}).One(&setting)
-
 	if err == nil {
 		self.Redirect("/public/login.html", 302)
 	}
@@ -35,7 +34,6 @@ func (self *PublicController) InitSetting() {
 		databasePwd := self.GetString("DatabasePwd")
 		databaseName := self.GetString("DatabaseName")
 		currentBlockNumber, err := self.GetInt("CurrentBlockNumber")
-
 		if err != nil {
 			self.JsonErrorReturn("区块高度填写错误")
 			return
@@ -49,22 +47,20 @@ func (self *PublicController) InitSetting() {
 
 		ks := keystore.NewKeyStore("/", keystore.StandardScryptN, keystore.StandardScryptP)
 		a, _ := ks.NewAccount(mainAccountPwd)
-		mainAccount, err := ks.Export(a, mainAccountPwd, mainAccountPwd)
 
+		mainAccount, err := ks.Export(a, mainAccountPwd, mainAccountPwd)
 		if err != nil {
 			self.JsonErrorReturn(err.Error())
 			return
 		}
 
 		mainAccountPwdHash, err := utils.RsaEncrypt([]byte(mainAccountPwd))
-
 		if err != nil {
 			self.JsonErrorReturn("主账户密码加密失败")
 			return
 		}
 
 		memberPwdHash, err := utils.RsaEncrypt([]byte(memberPwd))
-
 		if err != nil {
 			self.JsonErrorReturn("会员账户密码加密失败")
 			return
@@ -101,7 +97,6 @@ func (self *PublicController) Login() {
 	setting := models.Setting{}
 	settingDb := mongo.DB("asset").C("settings")
 	err := settingDb.Find(bson.M{}).One(&setting)
-
 	if err != nil {
 		self.Redirect("/public/initSetting.html", 302)
 	}
@@ -123,7 +118,6 @@ func (self *PublicController) Login() {
 		} else {
 
 			mainAccountPwdDecrypt, err := utils.RsaDecrypt([]byte(self.setting.MainAccountPwd))
-
 			if err != nil {
 				self.JsonErrorReturn("主账户密码解密失败")
 				return
@@ -135,7 +129,6 @@ func (self *PublicController) Login() {
 			}
 
 			memberPwdDecrypt, err := utils.RsaDecrypt([]byte(self.setting.MemberPwd))
-
 			if err != nil {
 				self.JsonErrorReturn("会员账户密码解密失败")
 				return

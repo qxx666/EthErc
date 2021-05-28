@@ -44,7 +44,6 @@ func (self *Manager) Login() (*Manager, error) {
 	manager := Manager{}
 	managersDb := mongo.DB("asset").C("managers")
 	err := managersDb.Find(bson.M{"username": self.Username, "deleted": Deleted_No}).One(&manager)
-
 	if err != nil {
 		return nil, errors.New("账号或者密码错误1001")
 	}

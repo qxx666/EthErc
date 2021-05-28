@@ -1,4 +1,8 @@
-## mongo
-asset
-    managers
-    settings
+## 部署
+```bigquery
+go mod download
+
+go build mian.go
+
+./main
+```
