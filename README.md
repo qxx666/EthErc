@@ -1,4 +1,10 @@
 ## 部署
+
+## 安装mongodb
+
+
+## 执行以下命令
+
 ```bigquery
 go mod download
 

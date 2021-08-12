@@ -44,7 +44,6 @@ func main() {
 	}
 
 	setting := models.SysSetting()
-
 	if setting != nil {
 		dataSource := fmt.Sprintf("%s:%s@tcp(%s:3306)/%s?charset=utf8",
 			setting.DatabaseUser, setting.DatabasePwd, setting.DatabaseHost, setting.DatabaseName)
@@ -70,8 +69,14 @@ func main() {
 			CreatedAt: time.Now(),
 			UpdatedAt: time.Now(),
 		}
-		_ = manager.AddManager()
+		err = manager.AddManager()
+		if err != nil {
+			fmt.Println(err)
+		}
 	}
 
+
+	fmt.Printf("http server Running on http://%s:%s\n",
+		beego.AppConfig.String("httpIP"),beego.AppConfig.String("httpPort"))
 	beego.Run()
 }

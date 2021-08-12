@@ -6,6 +6,7 @@ package models
 import (
 	"EthErc/utils"
 	"errors"
+	"fmt"
 	"gopkg.in/mgo.v2/bson"
 	"time"
 )
@@ -85,6 +86,7 @@ func (self *Manager) AddManager() error {
 	self.UpdatedAt = time.Now()
 	err = managersDb.Insert(self)
 	if err != nil {
+		fmt.Println(err)
 		return errors.New("管理员添加失败")
 	}
 	return nil
