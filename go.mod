@@ -10,7 +10,7 @@ require (
 	github.com/onrik/ethrpc v1.0.0
 	github.com/robfig/cron v1.2.0
 	github.com/smartystreets/goconvey v1.6.4
-	github.com/tidwall/gjson v1.7.5 // indirect
+	github.com/tidwall/gjson v1.9.3 // indirect
 	gopkg.in/check.v1 v1.0.0-20201130134442-10cb98267c6c // indirect
 	gopkg.in/mgo.v2 v2.0.0-20190816093944-a6b53ec6cb22
 	gopkg.in/yaml.v2 v2.4.0 // indirect
